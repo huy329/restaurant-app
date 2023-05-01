@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Restaurant App</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+          crossorigin="anonymous">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" th:href="@{/index}"><td th:text = "${#authentication.authorities}"></td></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" th:href="@{/user}">User</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" th:href="@{/food}">Food</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" th:href="@{/table}">Table</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" th:href="@{/bill}">Bill</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" th:href="@{/booking}">Booking</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" th:href="@{/deposit}">Deposit</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" th:href="@{/review}">Review</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" th:href="@{/logout}">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <br /><br />
+    <div class="container">
+        <div class="row col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="text-center">Food Update</h2>
+                </div>
+                <div class="card-body">
+                    <form action="/foodUpdate" method="POST" class="form-horizontal">
+                        <input type="hidden" id="foodId" name="foodId" th:value="${food.id}">
+                        
+                        <div class="form-group mb-3">
+                            <label class="form-label">Food Name</label>
+                            <input class="form-control" type="text" id="foodName" name="foodName" th:value="${food.name}" required><br>
+                        </div>
+                        
+                        <div class="form-group mb-3">
+                            <label class="form-label">Food Nation</label>
+                            <input class="form-control" type="text" id="foodNation" name="foodNation" th:value="${food.nation}" required><br>
+                        </div>
+                        
+                        <div class="form-group mb-3">
+                            <label class="form-label">Food Ingredient</label>
+                            <input class="form-control" type="text" id="foodIngredient" name="foodIngredient" th:value="${food.ingredient}" required><br>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label class="form-label">Food Image</label>
+                            <input class="form-control" type="text" id="foodImage" name="foodImage" th:value="${food.image}" required><br>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label class="form-label">Food Stage</label>
+                            <input class="form-control" type="text" id="foodStage" name="foodStage" th:value="${food.stage}" required><br>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label class="form-label">Food Type (0=Food, 1=Drink)</label>
+                            <input class="form-control" type="number" min="0" max="1" id="foodType" name="foodType" th:value="${food.type}" required><br>
+                        </div>
+
+                        <div class="form-group">
+                            <button class="btn btn-primary" type="submit">Update</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>menu</title>
+
+	<!-- font awesome cdn link  -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+
+	<!-- custom css file link  -->
+	<link rel="stylesheet" href="css/style.css">
+
+</head>
+<body>
+	<header class="header">
+		<section class="flex">
+			<a th:href="@{/home}" class="logo">yum-yum 😋</a>
+
+			<nav class="navbar">
+				<a th:href="@{/home}">home</a>
+				<a th:href="@{/foodMenu}">menu</a>
+                <a onclick="document.getElementById('bookingForm').submit(); return false;">booking</a>
+				<a th:href="@{/history}">history</a>
+			</nav>
+
+			<div class="icons">
+				deposit
+				<a th:href="@{/depositForm}"><i class="fas fa-plus-circle"></i></a>
+				<div id="user-btn" class="fas fa-user"></div>
+				<div id="menu-btn" class="fas fa-bars"></div>
+			</div>
+
+			<div class="profile">
+				<div class="flex">
+					<a onclick="document.getElementById('userUpdateForm').submit(); return false;" class="btn">profile</a>
+					<a th:href="@{/logout}" onclick="return confirm('logout from this website?');" class="delete-btn">logout</a>
+				</div>
+			</div>
+		</section>
+	</header>
+    <form id="userUpdateForm" method="POST" action="/customerUpdateForm">
+        <input type="hidden" id="userEmail" name="userEmail" th:value="${#authentication.name}">
+    </form>
+    <form id="bookingForm" method="POST" action="/bookingForm">
+        <input type="hidden" id="userEmail" name="userEmail" th:value="${#authentication.name}">
+    </form>
+
+
+	<div class="heading">
+		<h3>our menu</h3>
+		<p><a th:href="@{/home}">home</a> <span> / menu</span></p>
+	</div>
+
+	<section class="products">
+		<h1 class="title">latest dishes</h1>
+		
+		<center><h1 th:text="${message}" style="color: green;"></h1></center>
+		
+		<div class="box-container">
+			<tr th:each = "food : ${foodList}">
+				<form action="/foodMenuDetail" method="post" class="box">
+					<input type="hidden" id="foodId" name="foodId" th:value="${food.id}" required>
+					<img th:src="@{|/images/${food.image}|}" alt="Food Image">
+					<div class="name"><td th:text="${food.name}"></td></div>
+					<button type="submit" class="fas fa-eye"></button>
+				</form>
+			</tr>
+		</div>
+		
+	</section>
+
+<script src="js/script.js"></script>
+</body>
+</html>

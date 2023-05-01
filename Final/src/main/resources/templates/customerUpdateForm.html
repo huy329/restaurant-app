@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>update customer</title>
+
+   <!-- font awesome cdn link  -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+
+   <!-- custom css file link  -->
+   <link rel="stylesheet" href="css/style.css">
+
+</head>
+<body>
+	<header class="header">
+		<section class="flex">
+			<a th:href="@{/home}" class="logo">yum-yum 😋</a>
+
+			<nav class="navbar">
+				<a th:href="@{/home}">home</a>
+				<a th:href="@{/foodMenu}">menu</a>
+                <a onclick="document.getElementById('bookingForm').submit(); return false;">booking</a>
+				<a th:href="@{/history}">history</a>
+			</nav>
+
+			<div class="icons">
+				deposit
+				<a th:href="@{/depositForm}"><i class="fas fa-plus-circle"></i></a>
+				<div id="user-btn" class="fas fa-user"></div>
+				<div id="menu-btn" class="fas fa-bars"></div>
+			</div>
+
+			<div class="profile">
+				<div class="flex">
+					<a onclick="document.getElementById('userUpdateForm').submit(); return false;" class="btn">profile</a>
+					<a th:href="@{/logout}" onclick="return confirm('logout from this website?');" class="delete-btn">logout</a>
+				</div>
+			</div>
+		</section>
+	</header>
+    <form id="userUpdateForm" method="POST" action="/customerUpdateForm">
+        <input type="hidden" id="userEmail" name="userEmail" th:value="${#authentication.name}">
+    </form>
+    <form id="bookingForm" method="POST" action="/bookingForm">
+        <input type="hidden" id="userEmail" name="userEmail" th:value="${#authentication.name}">
+    </form>
+    
+	<section class="form-container">
+		<form action="/userCreate" method="POST">
+            <h3>your information</h3>
+			<h2 th:text="${user.balance}"></h2><h2> is your balance ($)<h2>
+            <input type="hidden" class="box" id="id" name="id" th:value="${user.id}">
+            <input type="text" class="box" id="name" name="name" th:value="${user.name}" required>
+            <input type="email" class="box" id="email" name="email" th:value="${user.email}" required>
+            <input type="password" class="box" id="password" name="password" th:value="${user.password}" required>
+            <input type="hidden" class="box" id="status" name="status" th:value="${user.status}">
+            <input type="hidden" class="box" id="balance" name="balance" th:value="${user.balance}">
+            <input type="hidden" class="box" id="promo" name="promo" th:value="${user.promo}">
+            <input type="submit" class="btn"  onclick="return confirm('u want save and logout?');" >
+        </form>
+	</section>
+	<!-- custom js file link  -->
+	<script src="js/script.js"></script>
+</body>
+</html>

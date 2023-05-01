@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>home</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+          crossorigin="anonymous">
+
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+	<header class="header">
+		<section class="flex">
+			<a th:href="@{/home}" class="logo">yum-yum 😋</a>
+
+			<nav class="navbar">
+				<a th:href="@{/home}">home</a>
+				<a th:href="@{/foodMenu}">menu</a>
+                <a onclick="document.getElementById('bookingForm').submit(); return false;">booking</a>
+				<a th:href="@{/history}">history</a>
+			</nav>
+
+			<div class="icons">
+				deposit
+				<a th:href="@{/depositForm}"><i class="fas fa-plus-circle"></i></a>
+				<div id="user-btn" class="fas fa-user"></div>
+				<div id="menu-btn" class="fas fa-bars"></div>
+			</div>
+
+			<div class="profile">
+				<div class="flex">
+					<a onclick="document.getElementById('userUpdateForm').submit(); return false;" class="btn">profile</a>
+					<a th:href="@{/logout}" onclick="return confirm('logout from this website?');" class="delete-btn">logout</a>
+				</div>
+			</div>
+		</section>
+	</header>
+    <form id="userUpdateForm" method="POST" action="/customerUpdateForm">
+        <input type="hidden" id="userEmail" name="userEmail" th:value="${#authentication.name}">
+    </form>
+    <form id="bookingForm" method="POST" action="/bookingForm">
+        <input type="hidden" id="userEmail" name="userEmail" th:value="${#authentication.name}">
+    </form>
+
+<section class="category">
+    <h1 class="title">history</h1>
+
+    <center>
+	<div class="box-container">
+        <form action="/history" method="POST">
+            <input type="hidden" id="number" name="number" value="0">
+            <button type="submit" class="box">
+                <img src="images/cat-2.png" alt="">
+                <h3>bill</h3>
+            </button>
+        </form>
+
+        <form action="/history" method="POST">
+            <input type="hidden" id="number" name="number" value="1">
+            <button type="submit" class="box">
+                <img src="images/cat-2.png" alt="">
+                <h3>booking</h3>
+            </button>
+        </form>
+
+        <form action="/history" method="POST">
+            <input type="hidden" id="number" name="number" value="2">
+            <button type="submit" class="box">
+                <img src="images/cat-2.png" alt="">
+                <h3>deposit</h3>
+            </button>
+        </form>
+	</div>
+    </center>
+</section>
+
+<div th:if="${number == 0}">
+    <div class="row col-md-10">
+        <h2>List of Bill</h2>
+    </div>
+    <table class="table table-bordered table-hover">
+        <thead class="table-dark">
+        <tr>
+            <th>Bill Id</th>
+            <th>Bill User</th>
+            <th>Bill Food</th>
+            <th>Bill Date</th>
+            <th>Bill Describe</th>
+            <th>Bill Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each = "bill : ${billList}" th:if="${bill.user.email == #authentication.name}">
+            <td th:text = "${bill.id}"></td>
+            <td th:text = "${bill.user.name}"></td>
+            <td th:text = "${bill.food.name}"></td>
+            <td th:text = "${bill.date}"></td>
+            <td th:text = "${bill.describer}"></td>
+            <td>
+                <span th:switch="${bill.status}">
+                    <span th:case="0">Đã đặt món</span>
+                    <span th:case="1">Đã nhận món</span>
+                    <span th:case="2">Đang nấu món</span>
+                    <span th:case="3">Đã nấu và chuẩn bị sắp xếp</span>
+                    <span th:case="4">Nhân viên phục vụ đang mang lên</span>
+                    <span th:case="5">Đã giao bàn - Chưa đánh giá</span>
+                    <span th:case="6">Đã giao bàn - Đã đánh giá</span>
+                    <span th:case="*">Trạng thái không hợp lệ</span>
+                </span> 
+                <form action="/reviewForm" method="POST" th:if="${bill.status.equals(5)}">
+                    <input type="hidden" id="billId" name="billId" th:value="${bill.id}" required>
+                    <input type="hidden" id="foodId" name="foodId" th:value="${bill.food.id}" required>
+                    <button type="submit" class="btn">Review</button>
+                </form>  
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="container" th:if="${number == 1}">
+    <div class="row col-md-10">
+        <h2>List of Booking</h2>
+    </div>
+    <table class="table table-bordered table-hover">
+        <thead class="table-dark">
+        <tr>
+            <th>Booking Id</th>
+            <th>Booking User</th>
+            <th>Booking Table</th>
+            <th>Booking Date</th>
+            <th>Booking Balance</th>
+            <th>Booking Describe</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each = "booking : ${bookingList}" th:if="${booking.user.email == #authentication.name}">
+            <td th:text = "${booking.id}"></td>
+            <td th:text = "${booking.user.name}"></td>
+            <td th:text = "${booking.table.name}"></td>
+            <td th:text = "${booking.date}"></td>
+            <td th:text = "${booking.balance}"></td>
+            <td th:text = "${booking.describer}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="container" th:if="${number == 2}">
+    <div class="row col-md-10">
+        <h2>List of Deposit</h2>
+    </div>
+    <table class="table table-bordered table-hover">
+        <thead class="table-dark">
+        <tr>
+            <th>Deposit Id</th>
+            <th>Deposit User</th>
+            <th>Deposit Date</th>
+            <th>Deposit Balance</th>
+            <th>Deposit Describer</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr th:each = "deposit : ${depositList}" th:if="${deposit.user.email == #authentication.name}">
+                <td th:text = "${deposit.id}"></td>
+                <td th:text = "${deposit.user.name}"></td>
+                <td th:text = "${deposit.date}"></td>
+                <td th:text = "${deposit.balance}"></td>
+                <td th:text = "${deposit.describer}"></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+<!-- custom js file link  -->
+<script src="js/script.js"></script>
+<script>
+    var swiper = new Swiper(".hero-slider", {
+    loop:true,
+    grabCursor: true,
+    effect: "flip",
+    pagination: {
+        el: ".swiper-pagination",
+        clickable:true,
+    },
+    });
+</script>
+</body>
+</html>

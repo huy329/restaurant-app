@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>home</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
+
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+	<header class="header">
+		<section class="flex">
+			<a th:href="@{/home}" class="logo">yum-yum 😋</a>
+
+			<nav class="navbar">
+				<a th:href="@{/home}">home</a>
+				<a th:href="@{/foodMenu}">menu</a>
+                <a onclick="document.getElementById('bookingForm').submit(); return false;">booking</a>
+				<a th:href="@{/history}">history</a>
+			</nav>
+
+			<div class="icons">
+				deposit
+				<a th:href="@{/depositForm}"><i class="fas fa-plus-circle"></i></a>
+				<div id="user-btn" class="fas fa-user"></div>
+				<div id="menu-btn" class="fas fa-bars"></div>
+			</div>
+
+			<div class="profile">
+				<div class="flex">
+					<a onclick="document.getElementById('userUpdateForm').submit(); return false;" class="btn">profile</a>
+					<a th:href="@{/logout}" onclick="return confirm('logout from this website?');" class="delete-btn">logout</a>
+				</div>
+			</div>
+		</section>
+	</header>
+    <form id="userUpdateForm" method="POST" action="/customerUpdateForm">
+        <input type="hidden" id="userEmail" name="userEmail" th:value="${#authentication.name}">
+    </form>
+    <form id="bookingForm" method="POST" action="/bookingForm">
+        <input type="hidden" id="userEmail" name="userEmail" th:value="${#authentication.name}">
+    </form>
+
+<section class="hero">
+    <div class="swiper hero-slider">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide slide">
+                <div class="content">
+                    <span>order online</span>
+                    <h3>delicious pizza</h3>
+                    <a th:href="@{/foodMenu}" class="btn">see menus</a>
+                </div>
+                <div class="image">
+                    <img src="images/pizza.png" alt="">
+                </div>
+            </div>
+
+            <div class="swiper-slide slide">
+                <div class="content">
+                    <span>order online</span>
+                    <h3>chezzy hamburger</h3>
+                    <a th:href="@{/foodMenu}" class="btn">see menus</a>
+                </div>
+                <div class="image">
+                    <img src="images/hamburger.png" alt="">
+                </div>
+            </div>
+
+            <div class="swiper-slide slide">
+                <div class="content">
+                    <span>order online</span>
+                    <h3>rosted chicken</h3>
+                    <a th:href="@{/foodMenu}" class="btn">see menus</a>
+                </div>
+                <div class="image">
+                    <img src="images/chicken.png" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="swiper-pagination"></div>
+    </div>
+</section>
+
+<section class="category">
+   <h1 class="title">food category</h1>
+
+	<div class="box-container">
+        <a th:href="@{/foodMenu}" class="box">
+            <img src="images/cat-2.png" alt="">
+            <h3>main dishes</h3>
+        </a>
+
+        <a th:href="@{/foodMenu}" class="box">
+            <img src="images/cat-3.png" alt="">
+            <h3>drinks</h3>
+        </a>
+	</div>
+</section>
+
+<section class="products">
+    <h1 class="title">latest dishes</h1>
+
+    <div class="box-container">
+        <tr th:each = "food : ${foodList}">
+            <form action="/foodMenuDetail" method="post" class="box">
+                <input type="hidden" id="foodId" name="foodId" th:value="${food.id}" required>
+                <img th:src="@{|/images/${food.image}|}" alt="Food Image">
+                <div class="name"><td th:text="${food.name}"></td></div>
+                <button type="submit" class="fas fa-eye"></button>
+            </form>
+        </tr>
+    </div>
+
+    <div class="more-btn">
+        <a th:href="@{/foodMenu}" class="btn">view all</a>
+    </div>
+</section>
+<script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+<!-- custom js file link  -->
+<script src="js/script.js"></script>
+<script>
+    var swiper = new Swiper(".hero-slider", {
+    loop:true,
+    grabCursor: true,
+    effect: "flip",
+    pagination: {
+        el: ".swiper-pagination",
+        clickable:true,
+    },
+    });
+</script>
+</body>
+</html>

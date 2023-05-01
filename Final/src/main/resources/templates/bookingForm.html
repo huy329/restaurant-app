@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>update customer</title>
+
+   <!-- font awesome cdn link  -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+
+   <!-- custom css file link  -->
+   <link rel="stylesheet" href="css/style.css">
+
+</head>
+<body>
+	<header class="header">
+		<section class="flex">
+			<a th:href="@{/home}" class="logo">yum-yum 😋</a>
+
+			<nav class="navbar">
+				<a th:href="@{/home}">home</a>
+				<a th:href="@{/foodMenu}">menu</a>
+                <a onclick="document.getElementById('bookingForm').submit(); return false;">booking</a>
+				<a th:href="@{/history}">history</a>
+			</nav>
+
+			<div class="icons">
+				deposit
+				<a th:href="@{/depositForm}"><i class="fas fa-plus-circle"></i></a>
+				<div id="user-btn" class="fas fa-user"></div>
+				<div id="menu-btn" class="fas fa-bars"></div>
+			</div>
+
+			<div class="profile">
+				<div class="flex">
+					<a onclick="document.getElementById('userUpdateForm').submit(); return false;" class="btn">profile</a>
+					<a th:href="@{/logout}" onclick="return confirm('logout from this website?');" class="delete-btn">logout</a>
+				</div>
+			</div>
+		</section>
+	</header>
+    <form id="userUpdateForm" method="POST" action="/customerUpdateForm">
+        <input type="hidden" id="userEmail" name="userEmail" th:value="${#authentication.name}">
+    </form>
+	<form id="bookingForm" method="POST" action="/bookingForm">
+        <input type="hidden" id="userEmail" name="userEmail" th:value="${#authentication.name}">
+    </form>
+
+	<section class="products">
+		<center>
+		<div th:if="${user.status == 1}">
+			<form id="userStatusStop" method="POST" action="/userStatusStop">
+				<input type="hidden" id="userEmail" name="userEmail" th:value="${#authentication.name}">
+				<button type="submit" class="btn" onclick="return confirm('u want go out!');">Stop Table</button>
+			</form>
+		</div>
+		</center>
+
+		<div th:if="${user.status == 0}" class="box-container">
+			<tr th:each="table : ${tableList}">
+				<form action="/bookingProcess" method="POST" class="box">
+					<input type="hidden" id="userEmail" name="userEmail" th:value="${#authentication.name}">
+					<input type="hidden" id="tableId" name="tableId" th:value="${table.id}" required>
+					<img src="/images/table.png" alt="Table Image">
+					<div class="name"><td th:text="${table.name}"></td></div>
+					<div class="name"><td th:text="${table.price}"></td>$</div>
+					<h3 th:text="${error}" style="color: red;"></h3>
+					<input type="submit" class="btn" onclick="return confirm('u want booking!');">
+				</form>
+			</tr>
+		</div>
+	</section>
+
+	<div style="position: fixed; bottom: 0; left: 0; background-color: #f2f2f2; padding: 80px;">
+		<table style="width: 100%;">
+			<tr>
+				<th>Account</th>
+				<th>Discount Rate</th>
+				<th>Booking</th>
+			</tr>
+			<tr>
+				<td>Gold</td>
+				<td>30%</td>
+				<td>>=3000$</td>
+			</tr>
+			<tr>
+				<td>Silver</td>
+				<td>20%</td>
+				<td>>=2000$</td>
+			</tr>
+		</table>
+		<h1>U are <span th:text="${user.promo &gt; 0.3 ? 'U are Gold' : user.promo &gt; 0.2 ? 'U are Silver' : 'Bronze'}"></span></h1>
+	</div>
+	<!-- custom js file link  -->
+	<script src="js/script.js"></script>
+</body>
+</html>
