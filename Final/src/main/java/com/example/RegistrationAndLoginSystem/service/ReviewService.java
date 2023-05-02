@@ -9,7 +9,7 @@ import com.example.RegistrationAndLoginSystem.entity.Bill;
 import com.example.RegistrationAndLoginSystem.entity.Food;
 import com.example.RegistrationAndLoginSystem.entity.Review;
 import com.example.RegistrationAndLoginSystem.entity.User;
-import com.example.RegistrationAndLoginSystem.process.builder.ReviewBuilder;
+import com.example.RegistrationAndLoginSystem.process.builder.ReviewDirector;
 import com.example.RegistrationAndLoginSystem.repository.BillRepository;
 import com.example.RegistrationAndLoginSystem.repository.ReviewRepository;
 
@@ -21,15 +21,9 @@ public class ReviewService {
     @Autowired
     BillRepository billRepository;
 
-    public void createReview(User user, Food food, Bill bill, String date, Integer reviewStar, String reviewComment) {
+    public void createReview(User user, Food food, Bill bill, Integer reviewStar, String reviewComment) {
         //NoteHuy: Builder
-        Review review = new ReviewBuilder()
-                                .setUser(user)
-                                .setFood(food)
-                                .setDate(date)
-                                .setStar(reviewStar)
-                                .setComment(reviewComment)
-                                .build();
+        Review review = new ReviewDirector().build(user, food, reviewStar, reviewComment);
 
         //NoteHuy: set status bill sang 6
         bill.setStatus(6);

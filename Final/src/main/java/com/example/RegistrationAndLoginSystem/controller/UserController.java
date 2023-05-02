@@ -19,9 +19,9 @@ import com.example.RegistrationAndLoginSystem.service.UserService;
 
 import jakarta.validation.Valid;
 
-import java.util.Date;
 import java.util.List;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -126,9 +126,9 @@ public class UserController {
     }
 
     //NoteHuy: điền form booking
-    @PostMapping("/bookingForm")
-    public String bookingForm(@RequestParam("userEmail") String userEmail, Model model){
-        User user = userService.findByEmail(userEmail);
+    @GetMapping("/bookingForm")
+    public String bookingForm(Authentication authentication, Model model){
+        User user = userService.findByEmail(authentication.getName());
 
         List<TableR> tableList = tableService.findAllTable();
 
@@ -175,11 +175,10 @@ public class UserController {
         User user = userService.findByEmail(userEmail);
         Food food = foodService.findById(foodId).orElse(null);
         Bill bill = billService.findById(billId).orElse(null);
-        Date date = new Date();
 
-        reviewService.createReview(user, food, bill, date.toString(), reviewStar, reviewComment);
+        reviewService.createReview(user, food, bill, reviewStar, reviewComment);
 
-        return "redirect:/review";
+        return "redirect:/history";
     }
 
     //NoteHuy: xem review của món ăn cụ thể
@@ -255,10 +254,10 @@ public class UserController {
                             @ModelAttribute("foodId") Long foodId,
                             Model model) {
         Food food = foodService.findById(foodId).orElse(null);
-        List<Review> reviewList = reviewService.findAllReviewFood(food);
+        List<Review> reviewFoodList = reviewService.findAllReviewFood(food);
 
         model.addAttribute("food", food);
-        model.addAttribute("reviewList", reviewList);
+        model.addAttribute("reviewFoodList", reviewFoodList);
         return "/foodMenuDetail";
     }
 

@@ -1,4 +1,4 @@
-package com.example.RegistrationAndLoginSystem.process.abstractF;
+package com.example.RegistrationAndLoginSystem.process.factory;
 
 public class SilverCustomer extends Customer {
    public SilverCustomer(double discountRate) {

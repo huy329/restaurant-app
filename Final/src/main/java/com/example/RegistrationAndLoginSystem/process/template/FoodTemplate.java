@@ -3,7 +3,7 @@ package com.example.RegistrationAndLoginSystem.process.template;
 import com.example.RegistrationAndLoginSystem.entity.Food;
 
 public class FoodTemplate extends FoodAndDrinkTemplate {
-    Food food;
+    private Food food;
 
     public FoodTemplate(Food food) {
         this.food = food;

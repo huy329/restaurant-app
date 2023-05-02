@@ -4,9 +4,6 @@ import com.example.RegistrationAndLoginSystem.entity.Bill;
 import com.example.RegistrationAndLoginSystem.repository.BillRepository;
 
 public class StatusUpdateSingleton {
-    BillRepository billRepository;
-    Bill bill;
-
     private static StatusUpdateSingleton instance;
 
     private StatusUpdateSingleton() {

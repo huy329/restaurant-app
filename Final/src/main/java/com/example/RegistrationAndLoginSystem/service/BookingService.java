@@ -1,6 +1,5 @@
 package com.example.RegistrationAndLoginSystem.service;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,10 +8,10 @@ import org.springframework.stereotype.Service;
 import com.example.RegistrationAndLoginSystem.entity.Booking;
 import com.example.RegistrationAndLoginSystem.entity.TableR;
 import com.example.RegistrationAndLoginSystem.entity.User;
-import com.example.RegistrationAndLoginSystem.process.builder.BookingBuilder;
-import com.example.RegistrationAndLoginSystem.process.abstractF.Customer;
-import com.example.RegistrationAndLoginSystem.process.abstractF.CustomerDiscountFactory;
-import com.example.RegistrationAndLoginSystem.process.abstractF.CustomerFactory;
+import com.example.RegistrationAndLoginSystem.process.builder.BookingDirector;
+import com.example.RegistrationAndLoginSystem.process.factory.Customer;
+import com.example.RegistrationAndLoginSystem.process.factory.CustomerDiscountFactory;
+import com.example.RegistrationAndLoginSystem.process.factory.CustomerFactory;
 import com.example.RegistrationAndLoginSystem.repository.BookingRepository;
 import com.example.RegistrationAndLoginSystem.repository.TableRepository;
 import com.example.RegistrationAndLoginSystem.repository.UserRepository;
@@ -30,12 +29,7 @@ public class BookingService {
 
     public void createBooking(User user, TableR table) {
         //NoteHuy: Builder
-        Booking booking = new BookingBuilder()
-                                .setTable(table)
-                                .setUser(user)
-                                .setDate(new Date().toString())
-                                .setBalance(table.getPrice())
-                                .build();
+        Booking booking = new BookingDirector().build(user, table);
 
         //NoteHuy: Abstract Factory
         CustomerFactory customerFactory = new CustomerDiscountFactory();
@@ -48,8 +42,6 @@ public class BookingService {
         user.setBalance(user.getBalance()-(table.getPrice()*discountRate));
         user.setStatus(1);
         user.setPromo(customer.getDiscountRate());
-
-        table.setUser(user);
         
         userRepository.save(user);
         tableRepository.save(table);

@@ -110,11 +110,8 @@ public class AdminController {
     @PostMapping("/tableCreate")
     public String tableCreate(
                             @ModelAttribute("tableName") String tableName,
-                            @ModelAttribute("userId") Long userId,
                             @ModelAttribute("tablePrice") Double tablePrice) {
-        User user = userService.findById(userId).orElse(null);
-
-        TableR table = new TableR(null, tableName, user, tablePrice);
+        TableR table = new TableR(null, tableName, tablePrice);
         
         tableService.createTable(table);
         return "redirect:/table";
@@ -136,10 +133,8 @@ public class AdminController {
     public String tableUpdate(
                             @ModelAttribute("tableId") Long tableId,
                             @ModelAttribute("tableName") String tableName,
-                            @ModelAttribute("userId") Long userId,
                             @ModelAttribute("tablePrice") Double tablePrice) {
-        User user = userService.findById(userId).orElse(null);
-        TableR table = new TableR(tableId, tableName, user, tablePrice);
+        TableR table = new TableR(tableId, tableName, tablePrice);
         
         tableService.updateTable(table);
         return "redirect:/table";

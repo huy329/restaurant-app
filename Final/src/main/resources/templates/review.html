@@ -74,14 +74,6 @@
                 <td th:text = "${review.star}"></td>
                 <td th:text = "${review.comment}"></td>
             </tr>
-            <tr th:each = "review : ${reviewList}" th:unless="${#authorization.expression('hasRole(''ADMIN'')')}" th:if="${review.user.email == #authentication.name}">
-                <td th:text = "${review.id}"></td>
-                <td th:text = "${review.user.name}"></td>
-                <td th:text = "${review.food.name}"></td>
-                <td th:text = "${review.date}"></td>
-                <td th:text = "${review.star}"></td>
-                <td th:text = "${review.comment}"></td>
-            </tr>
             </tbody>
         </table>
     </div>
