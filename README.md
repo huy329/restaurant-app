@@ -1,3 +1,7 @@
+<a name="_toc134082090"></a>**LINK TO VIDEO DEMO**
+
+https://youtu.be/crJecN\_XSC8
+
 <a name="_toc134028150"></a><a name="_toc134082072"></a>**CHAPTER 1: TOPIC DETAILS**
 
 1. <a name="_toc134028151"></a><a name="_toc134082073"></a>**Reasons for choosing the topic**
@@ -200,7 +204,7 @@ Using the Command design pattern for automatic billing can provide many benefits
 1. Increase reusability: The Command design pattern increases the reusability of source code. Billing requests are encapsulated into Command objects, which can be reused in different scenarios.
 1. Reduce Errors: With Command, billing requests are handled accurately, helping to reduce errors in the billing process.
 
-1) <a name="_toc134082085"></a>***Decorator***
+5) <a name="_toc134082085"></a>***Decorator***
 
 Using the Decorator design pattern for customizing dishes and adding toppings can bring many benefits, including:
 
@@ -210,7 +214,7 @@ Using the Decorator design pattern for customizing dishes and adding toppings ca
 1. Increase reusability: The Decorator design pattern increases the reusability of source code. The decorators can be reused for different objects in the system.
 1. Minimize Errors: With Decorator, dish customizations and toppings are handled accurately, helping to reduce errors in the ordering process.
 
-5) <a name="_toc134082086"></a>***Singleton***
+6) <a name="_toc134082086"></a>***Singleton***
 
 Using the Singleton design pattern for state setting for bills can bring many benefits, including:
 
@@ -220,7 +224,7 @@ Using the Singleton design pattern for state setting for bills can bring many be
 1. Saving resources: With the Singleton design pattern, we can save computer resources by creating only a single object for setting the state of the bill instead of creating many different objects.
 1. Easy to extend and maintain: Using the Singleton design pattern makes it easier to extend and maintain the system. Because there is only one object that manages the state of the bill, when adding or modifying the function of the bill, we only need to modify a single object without affecting other objects in the system.
 
-6) <a name="_toc134082087"></a>***Strategy***
+7) <a name="_toc134082087"></a>***Strategy***
 
 When using Strategy for a variety of deposit methods, there are many benefits as follows:
 
@@ -229,7 +233,7 @@ When using Strategy for a variety of deposit methods, there are many benefits as
 1. Scalability: When we want to add a new deposit form, we just need to create a new strategy without modifying the code of other deposit strategies.
 1. Reduce dependency: By separating the details of the deposit form into separate objects, we reduce the dependency of the program on a particular deposit form.
 
-7) <a name="_toc134082088"></a>***Template Method***
+8) <a name="_toc134082088"></a>***Template Method***
 
 When using the Template Method for detailed processing information, there are many benefits as follows:
 
@@ -278,7 +282,3 @@ When using the Template Method for detailed processing information, there are ma
 ![](./README_images/Aspose.Words.79ed1400-3141-4ba9-b08b-f725d3a434c7.026.png)
 
 <a name="_toc133968827"></a><a name="_toc134082114"></a>Figure 23. Template Method Class Diagram
-
-1. <a name="_toc134082090"></a>**LINK TO VIDEO DEMO**
-
-https://youtu.be/crJecN\_XSC8
