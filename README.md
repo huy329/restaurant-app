@@ -1,6 +1,4 @@
-<a name="_toc134082090"></a>**LINK TO VIDEO DEMO**
-
-https://youtu.be/crJecN\_XSC8
+<a name="_toc134082090"></a>**LINK TO VIDEO DEMO**: https://youtu.be/crJecN\_XSC8
 
 <a name="_toc134028150"></a><a name="_toc134082072"></a>**CHAPTER 1: TOPIC DETAILS**
 
