@@ -1,5 +1,3 @@
-﻿13
-
 <a name="_toc134028150"></a><a name="_toc134082072"></a>**CHAPTER 1: TOPIC DETAILS**
 
 1. <a name="_toc134028151"></a><a name="_toc134082073"></a>**Reasons for choosing the topic**
@@ -8,7 +6,7 @@ The application of ordering food in a buffet restaurant has many important roles
 
 1. <a name="_toc134028152"></a><a name="_toc134082074"></a>**Demo**
 
-<a name="_toc134028153"></a><a name="_toc134082075"></a>***Login And Register page***
+<a name="_toc134028153"></a><a name="_toc134082075"></a>***a. Login And Register page***
 
 ![](./README_images/Aspose.Words.79ed1400-3141-4ba9-b08b-f725d3a434c7.001.png)
 
@@ -22,9 +20,7 @@ Describe: Screen used for user register.
 
 Describe: Screen used for user register.
 
-
-
-<a name="_toc134028154"></a><a name="_toc134082076"></a>***Customer Page***
+<a name="_toc134028154"></a><a name="_toc134082076"></a>***b. Customer Page***
 
 ![](./README_images/Aspose.Words.79ed1400-3141-4ba9-b08b-f725d3a434c7.003.png)
 
@@ -69,7 +65,7 @@ Describe: screen for the user to top up the account. Depending on the method of 
 
 Describe: screen to edit user information and view the amount in the account.
 
-<a name="_toc134028155"></a><a name="_toc134082077"></a>***Admin Page***
+<a name="_toc134028155"></a><a name="_toc134082077"></a>***c. Admin Page***
 
 ![](./README_images/Aspose.Words.79ed1400-3141-4ba9-b08b-f725d3a434c7.009.png)
 
@@ -113,47 +109,6 @@ Describe: screen for admin to manage booking history of all users.
 <a name="_toc133968842"></a><a name="_toc134082106"></a>Figure 15. Manager Review History Page
 
 Describe: screen for admin to manage review history of all users.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <a name="_toc134082078"></a>**CHAPTER 2: ARCHITECTURAL DESIGN**
 
@@ -215,7 +170,7 @@ When using MVC for database, there are many benefits as follows:
 1. Increased productivity: By separating the concerns of an application, developers can work on different parts of the application at the same time. This increases productivity and reduces the time required to develop the application.
 1. Improved maintainability: The separation of concerns in the MVC pattern makes it easier to maintain an application. Developers can modify or replace a component without affecting the other components.
 
-1) <a name="_toc134082082"></a>***Factory Method***
+2) <a name="_toc134082082"></a>***Factory Method***
 
 Using Factory Method for customer classification in an application can bring many benefits, including:
 
@@ -225,7 +180,7 @@ Using Factory Method for customer classification in an application can bring man
 1. Speed up development: The Factory Method pattern can speed up development because it allows developers to reuse existing code to create new objects. This means that developers can focus on creating the unique aspects of the new object, rather than having to start from scratch.
 1. Reduce errors: By centralizing the object creation logic, the Factory Method pattern can help reduce errors because it ensures that all objects are created using the same logic. This can help to prevent inconsistencies or errors that might occur if each component were responsible for creating its own objects.
 
-1) <a name="_toc134082083"></a>***Builder***
+3) <a name="_toc134082083"></a>***Builder***
 
 Using the Builder design pattern for automated invoice generation and reviews can offer many benefits, including:
 
@@ -235,7 +190,7 @@ Using the Builder design pattern for automated invoice generation and reviews ca
 1. Speed up development: Using the Builder design pattern helps speed up system development. With Builder, we can create objects quickly and easily, reducing development time.
 1. Reduce Errors: With Builder, object properties are defined correctly, which helps to reduce errors during object initialization.
 
-1) <a name="_toc134082084"></a>***Command***
+4) <a name="_toc134082084"></a>***Command***
 
 Using the Command design pattern for automatic billing can provide many benefits, including:
 
@@ -255,7 +210,7 @@ Using the Decorator design pattern for customizing dishes and adding toppings ca
 1. Increase reusability: The Decorator design pattern increases the reusability of source code. The decorators can be reused for different objects in the system.
 1. Minimize Errors: With Decorator, dish customizations and toppings are handled accurately, helping to reduce errors in the ordering process.
 
-1) <a name="_toc134082086"></a>***Singleton***
+5) <a name="_toc134082086"></a>***Singleton***
 
 Using the Singleton design pattern for state setting for bills can bring many benefits, including:
 
@@ -265,7 +220,7 @@ Using the Singleton design pattern for state setting for bills can bring many be
 1. Saving resources: With the Singleton design pattern, we can save computer resources by creating only a single object for setting the state of the bill instead of creating many different objects.
 1. Easy to extend and maintain: Using the Singleton design pattern makes it easier to extend and maintain the system. Because there is only one object that manages the state of the bill, when adding or modifying the function of the bill, we only need to modify a single object without affecting other objects in the system.
 
-1) <a name="_toc134082087"></a>***Strategy***
+6) <a name="_toc134082087"></a>***Strategy***
 
 When using Strategy for a variety of deposit methods, there are many benefits as follows:
 
@@ -274,7 +229,7 @@ When using Strategy for a variety of deposit methods, there are many benefits as
 1. Scalability: When we want to add a new deposit form, we just need to create a new strategy without modifying the code of other deposit strategies.
 1. Reduce dependency: By separating the details of the deposit form into separate objects, we reduce the dependency of the program on a particular deposit form.
 
-<a name="_toc134082088"></a>***h) Template Method***
+7) <a name="_toc134082088"></a>***Template Method***
 
 When using the Template Method for detailed processing information, there are many benefits as follows:
 
